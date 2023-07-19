@@ -1,16 +1,18 @@
 <script lang="ts">
+  import { createEventDispatcher } from "svelte";
   import Square from "./Square.svelte";
   export let grid:string[];
+  export let found:string[];
   let a = -1;
   let b = -1;
   let clearTimeOutID:number;
-  const onSelect = ()=>{
-    // console.log(e);
-  }
+  const dipatch = createEventDispatcher();
 </script>
 <div class="grid">
     {#each grid  as emoji,i}
-    <Square on:click={(evt)=>{
+    <Square
+    found={found.includes(emoji)}
+    on:click={(evt)=>{
         clearTimeout(clearTimeOutID);
         if(a === -1 && b === -1){
             a = i;
@@ -18,6 +20,9 @@
             b = i;
             if(grid[a] === grid[b]){
                 //correct
+                dipatch('found',{
+                    emoji
+                })
             }else{
                 //incorrect reset
                 clearTimeOutID = setTimeout(() => {

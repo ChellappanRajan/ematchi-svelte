@@ -27,7 +27,11 @@
 
     </div>
     <div class="grid-container">
-        <Grid {grid}></Grid>
+        <Grid on:found={(event)=>{
+            found =[...found,event.detail.emoji]
+        }} {grid}
+        {found}
+        ></Grid>
     </div>
     <div class="info">
 
