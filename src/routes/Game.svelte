@@ -35,7 +35,7 @@ import Grid from "./Grid.svelte";
         remaining = remaining_at_start - (Date.now() - start);
         if(remaining <=0){
             playing = false;
-            //Game Lost //TODO
+            //TODO//Game Lost 
         }
     }
     loop();
@@ -46,11 +46,16 @@ import Grid from "./Grid.svelte";
 </script>
 <div class="game">
     <div class="info">
-        <Countdown {remaining} duration={level.duration}  ></Countdown>
+        <Countdown on:click={()=>{
+            //TODO pause the game
+        }} {remaining} duration={level.duration}  ></Countdown>
     </div>
     <div class="grid-container">
         <Grid on:found={(event)=>{
-            found =[...found,event.detail.emoji]
+            found =[...found,event.detail.emoji];
+            if(found.length === (size * size) / 2){
+                //win the game
+            }
         }} {grid}
         {found}
         ></Grid>

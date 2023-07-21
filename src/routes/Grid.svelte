@@ -11,6 +11,7 @@
 <div class="grid">
     {#each grid  as emoji,i}
     <Square
+    group={grid.indexOf(emoji) === i ? 'a' : 'b'}
     found={found.includes(emoji)}
     on:click={(evt)=>{
         clearTimeout(clearTimeOutID);
@@ -46,5 +47,6 @@
         grid-template-rows: repeat(4,1fr);
         height: 100%;
         grid-gap: 0.5em;
+        perspective: 100vw;
     }
 </style>
